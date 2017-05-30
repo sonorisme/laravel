@@ -8,7 +8,7 @@
 			<div class="panel">
 				<h3>{{$post->title}}</h3>
 				<p>{{$post->body}}</p>
-				<a href="{{route('posts.show', $post->id)}}" class="btn btn-primary">Read More</a>
+				<a href="{{url('blog/'.$post->slug)}}" class="btn btn-primary">Read More</a>
 			</div>
 		</div>
 		<div class="col-md-2">

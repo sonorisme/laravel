@@ -42,12 +42,13 @@ class PostController extends Controller
     {
         //
         $this->validate($request, array(
-                'title'=>'required|max:255',
+                'title'=>'required|max:255|unique:posts,title',
                 'body'=>'required'
             ));
         $post = new Post;
         $post->title = $request->title;
         $post->body = $request->body;
+        $post->slug = implode('-', explode(' ', $request->title));
         $post->save();
 
         return redirect()->route('posts.show', $post->id);
@@ -89,6 +90,11 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if($request->title != Post::find($id)->title){
+            $this->validate($request, array(
+                'title'=>'unique:posts,title'
+            ));
+        }
         $this->validate($request, array(
                 'title'=>'required|max:255',
                 'body'=>'required'
@@ -96,6 +102,7 @@ class PostController extends Controller
         $post = Post::find($id);
         $post->title = $request->title;
         $post->body = $request->body;
+        $post->slug = implode('-', explode(' ', $request->title));
         $post->save();
         Session::flash('success', 'Updated Successfully!');
         //return view('show')->with
