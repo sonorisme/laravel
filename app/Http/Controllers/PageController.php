@@ -10,7 +10,7 @@ class PageController extends Controller
     //
     public function getIndex(){
     	$posts = Post::orderBy('created_at')->take(5)->get();
-    	return view('home')->withPosts($posts);
+    	return view('home1')->withPosts($posts);
     }
 
     public function getSingle($slug){
