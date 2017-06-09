@@ -33,3 +33,9 @@ Route::resource('posts', 'PostController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('categories', 'CategoryController', ['except'=>['create']]);
+Route::resource('tags', 'TagController', ['except'=>['create']]);
+
+Route::get('contact', ['uses'=>'PageController@getContact', 'as'=>'contact.get'])->middleware('auth');
+Route::post('contact', ['uses'=>'PageController@postContact', 'as'=>'contact.post'])->middleware('auth');

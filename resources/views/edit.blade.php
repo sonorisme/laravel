@@ -1,18 +1,25 @@
 @extends('main')
 @section('title', 'Edit')
+@section('style')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+@stop
 @section('content')
+<div class="container">
 	<div class="row">
 		<div class="col-md-8">
 			{!! Form::model( $post, ['route' => ['posts.update', $post->id], 'method'=>'PUT']) !!}
 			    {{ Form::label('title', 'Title: ')}}
 			    {{ Form::text('title', null, array('class'=>'form-control'))}}
 
+				{{ Form::label('category', 'Category: ')}}			    			    
+				{{ Form::select('category', $categories, $post->category_id, ['class'=>'form-control'])}}
+
+				{{ Form::label('tag', 'Tags:', ['class'=>'btn-spacing'])}}
+			    {{ Form::select("tag[]", $tags, $value, ['class'=>"form-control tag", 'multiple'=>"multiple"])}}
+
 			    {{ Form::label('body', 'Post Body: ')}}
 			    {{ Form::textarea('body', null, array('class'=>'form-control'))}}
-
-			    
-			   
-			
+	    
 		</div>
 		<div class="col-md-4 well">
 			<dl class="dl-horizontal">
@@ -38,6 +45,15 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
+</div>
+	
+@stop
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('.tag').select2();
+	});  
+</script>
 @stop

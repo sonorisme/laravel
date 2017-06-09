@@ -8,10 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{config('app.name', 'Laravel')}}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
 
     <!-- Scripts -->
     <script>
@@ -59,9 +60,24 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                     <li>
+                                    <li>
                                         <a href="{{ route('posts.index') }}">
                                             Posts
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('categories.index') }}">
+                                            Categories
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('tags.index') }}">
+                                            Tags
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('contact.get') }}">
+                                            Contact
                                         </a>
                                     </li>
                                     <li>

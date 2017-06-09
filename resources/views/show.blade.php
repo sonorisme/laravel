@@ -20,6 +20,13 @@
 					</tr>
 				</tbody>			
 			</table>
+			<hr>
+			<div>
+			@foreach($new->tags as $tag)
+				<span class="label label-default">{{ $tag->name}}</span>
+			@endforeach
+			</div>
+
 		</div>
 		<div class="col-md-4 well">
 			<dl class="dl-horizontal">
@@ -29,6 +36,10 @@
 			<dl class="dl-horizontal">
 				<dt>Updated at:</dt>
 				<dd>{{ $new->updated_at}}</dd>
+			</dl>
+			<dl class="dl-horizontal">
+				<dt>Categorized in:</dt>
+				<dd>{{ $new->category->name}}</dd>
 			</dl>
 			<hr>
 			<div class="row">

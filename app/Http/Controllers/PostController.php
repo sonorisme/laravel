@@ -5,20 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use Session;
+use App\Category;
+use App\Tag;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
 
     public function index()
     {
@@ -36,7 +37,9 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view('create');
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('create')->withCategories($categories)->withTags($tags);
     }
 
     /**
@@ -48,15 +51,19 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        //dd($request);
         $this->validate($request, array(
                 'title'=>'required|max:255|unique:posts,title',
-                'body'=>'required'
+                'body'=>'required',
+                'category'=>'required|integer'
             ));
         $post = new Post;
         $post->title = $request->title;
         $post->body = $request->body;
+        $post->category_id = $request->category;
         $post->slug = implode('-', explode(' ', $request->title));
         $post->save();
+        $post->tags()->sync($request->tag, false);
 
         return redirect()->route('posts.show', $post->id);
     }
@@ -83,8 +90,25 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        $categories = Category::all();
+        $cats = array();
+        foreach ($categories as $category) {
+            $cats[$category->id] = $category->name;
+        }
         $post = Post::find($id);
-        return view('edit')->withPost($post);
+        
+        $tags = Tag::all();
+        $tags1 = array();
+        foreach ($tags as $tag) {
+            $tags1[$tag->id] = $tag->name;
+        }
+
+        $value = [];
+        foreach ($post->tags as $key) {
+            $value[] = $key->id;
+        }
+
+        return view('edit')->withPost($post)->withCategories($cats)->withTags($tags1)->withValue($value);
     }
 
     /**
@@ -100,6 +124,7 @@ class PostController extends Controller
         if($request->title != Post::find($id)->title){
             $this->validate($request, array(
                 'title'=>'unique:posts,title'
+                //in posts table's title column
             ));
         }
         $this->validate($request, array(
@@ -108,11 +133,18 @@ class PostController extends Controller
             ));
         $post = Post::find($id);
         $post->title = $request->title;
+        $post->category_id = $request->category;
         $post->body = $request->body;
         $post->slug = implode('-', explode(' ', $request->title));
         $post->save();
+
+        if($request->tag){
+            $post->tags()->sync($request->tag);
+        } else{
+            $post->tags()->sync([]);
+        }
         Session::flash('success', 'Updated Successfully!');
-        //return view('show')->with
+
         return redirect()->route('posts.show', $post->id);
     }
 
@@ -126,6 +158,7 @@ class PostController extends Controller
     {
         //
         $post = Post::find($id);
+        $post->tags()->detach();
         $post->delete();
         Session::flash('success','Deleted Successfully!');
         return redirect()->route('posts.index');
