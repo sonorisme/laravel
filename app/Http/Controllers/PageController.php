@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use Session;
+use App\Mail\xxx;
 
 
 class PageController extends Controller
@@ -23,7 +24,7 @@ class PageController extends Controller
 
     public function getArchive(){
     	$posts = Post::paginate(10);
-    	return view('archive')-》withPosts($posts);
+    	return view('archive')->withPosts($posts);
     }
 
     public function getContact(){
@@ -36,9 +37,11 @@ class PageController extends Controller
             'email'=>'email|required',
             'text'=>'min:10',
             'subject'=>'min:3'
-            ])
+            ]);
 
-
+        Mail::to('sonor.fz@163.com')->send(new xxx($request));
+        
+        return redirect()->route('posts.index');
     }
 
 }
