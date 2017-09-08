@@ -14,12 +14,7 @@ class PageController extends Controller
     //
     public function getIndex(Request $request){
     	$posts = Post::orderBy('created_at')->take(5)->get();
-    	return view('test')->withPosts($posts);
-    }
-
-    public function getSingle($slug){
-    	$post = Post::where('slug', '=', $slug)->first();
-    	return view('single')->withPost($post);
+    	return view('home')->withPosts($posts);
     }
 
     public function getArchive(){

@@ -1,9 +1,11 @@
-@extends('main')
+@extends('layouts.app')
 @section('title', 'Create')
 @section('style')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 @stop
 @section('content')
+<div class="top-first-padding"></div>
+<div class="container">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<h2>This is a page</h2>
@@ -34,6 +36,9 @@
 		</div>
 
 	</div>
+	<br>
+	<br>
+</div>
 @stop
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>

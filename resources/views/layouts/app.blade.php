@@ -136,6 +136,47 @@
 
     @yield('content')
     </div>
+
+
+     <!-- Footer -->
+    <footer class="text-center">
+      <div class="footer-above">
+        <div class="container">
+          <div class="row">
+            <div class="footer-col col-md-4">
+              <h4>Location</h4>
+              <p>Ryde
+                <br>Sydney, NSW 2112</p>
+            </div>
+            <div class="footer-col col-md-4">
+              <h4>Contact Me</h4>
+              <p>sono1199@hotmail.com
+                <br>0468371798</p>
+            </div>
+            <div class="footer-col col-md-4">
+              <h4>Desperate for Web Developing job</h4>
+              <p>Please feel free to contact me anytime.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-below">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              Copyright &copy; Su Nier 2017
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top d-lg-none">
+      <a class="btn btn-primary js-scroll-trigger" href="#page-top">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </div>
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->
     <script src="/vendor/jquery/jquery.min.js"></script>

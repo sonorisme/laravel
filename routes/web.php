@@ -17,8 +17,7 @@ Route::get('/', function () {
 });
 */
 Route::get('/', 'PageController@getIndex');
-Route::get('blog/{slug}', ['uses'=>'PageController@getSingle', 'as'=>'blog.single'])
-	->where('slug','[\w\d\-]+');
+
 Route::get('blog', ['uses'=>'PageController@getArchive', 'as'=>'blog.archive']);
 
 /*
