@@ -24,16 +24,16 @@
     </script>
 
     <!-- Bootstrap core CSS -->
-    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/laravel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
 
     <!-- Custom fonts for this template -->
-    <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/laravel/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="/css/freelancer.css" rel="stylesheet">
+    <link href="/laravel/css/freelancer.css" rel="stylesheet">
     @yield('style')
 
   </head>
@@ -179,15 +179,15 @@
     </div>
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/popper/popper.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/laravel/vendor/jquery/jquery.min.js"></script>
+    <script src="/laravel/vendor/popper/popper.min.js"></script>
+    <script src="/laravel/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/laravel/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="/js/freelancer.js"></script>
+    <script src="/laravel/js/freelancer.js"></script>
     @yield('js')
 </body>
 </html>
