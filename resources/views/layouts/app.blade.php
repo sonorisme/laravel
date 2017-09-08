@@ -14,7 +14,7 @@
     <title>{{config('app.name', 'Laravel')}}</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/laravel/css/style.css">
 
     <!-- Scripts -->
     <script>
