@@ -23,7 +23,7 @@ class PageController extends Controller
     }
 
     public function getArchive(){
-    	$posts = Post::paginate(10);
+    	$posts = Post::paginate(5);
     	return view('archive')->withPosts($posts);
     }
 
