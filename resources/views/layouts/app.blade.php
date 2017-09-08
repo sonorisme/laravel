@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
-<head>
+<html lang="en">
+
+  <head>
+
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -11,7 +14,6 @@
     <title>{{config('app.name', 'Laravel')}}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- Scripts -->
@@ -20,89 +22,131 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
-</head>
-<body>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+
+    <!-- Custom fonts for this template -->
+    <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/freelancer.css" rel="stylesheet">
+    @yield('style')
+
+  </head>
+
+  <body id="page-top">
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Hello Laravel</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            @if(Request::url() == '/') 
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#portfolio">Recent Posts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            </li>
+            @else
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{{$navPath[0]}}">Recent Posts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{{$navPath[1]}}">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{{$navPath[2]}}">Contact</a>
+            </li>
+            @endif
+            @if (Auth::guest())
+               <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('login') }}">Login</a></li>
+               <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('register') }}">Register</a></li>
+            @else
+               <li class="dropdown nav-item">
+                   <a href="#" class="dropdown-toggle nav-link js-scroll-trigger" data-toggle="dropdown" role="button" aria-expanded="false">
+                       Hello {{ Auth::user()->name }} <span class="caret"></span>
+                   </a>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
+                   <ul class="dropdown-menu" role="menu">
+                       <li class="nav-item">
+                           <a class="nav-link js-scroll-trigger" href="{{ route('posts.index') }}">
+                               Posts
+                           </a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link js-scroll-trigger" href="{{ route('categories.index') }}">
+                               Categories
+                           </a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link js-scroll-trigger" href="{{ route('tags.index') }}">
+                               Tags
+                           </a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link js-scroll-trigger" href="{{ route('contact.get') }}">
+                               Contact
+                           </a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link js-scroll-trigger" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                               Logout
+                           </a>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+                           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                               {{ csrf_field() }}
+                           </form>
+                       </li>                                  
+                   </ul>
+               </li>
+            @endif
+          </ul>
+        </div>
+      </div>
+    </nav>
+    @if (Session::has('success'))
+      <div class="alert alert-success top-first-padding">
+        <p>Success: {{Session::get('success')}}</p>
+      </div>
+    @endif
+    @if (count($errors) > 0)
+      <ul class="top-first-padding">
+      @foreach($errors->all() as $error)
+        <li>{{$error}}</li>
+      @endforeach
+      </ul>
+    @endif
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Hello {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('posts.index') }}">
-                                            Posts
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('categories.index') }}">
-                                            Categories
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('tags.index') }}">
-                                            Tags
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('contact.get') }}">
-                                            Contact
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>                                  
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        @yield('content')
+    @yield('content')
     </div>
-
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/popper/popper.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="/js/freelancer.js"></script>
+    @yield('js')
 </body>
 </html>

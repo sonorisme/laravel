@@ -2,6 +2,7 @@
 @section('title', 'Show')
 
 @section('content')
+<div class="top-first-padding"></div>
 <div class="container">
 	<div class="row">
 		<div class="col-md-8">

@@ -1,6 +1,7 @@
-@extends('main')
+@extends('layouts.app')
 @section('title', 'Show')
 @section('content')
+<div class="top-first-padding"></div>
 <div class="container">
 	<div class="row">
 		<div class="col-md-8">
@@ -22,9 +23,11 @@
 			</table>
 			<hr>
 			<div>
+			<span>Tags: 
 			@foreach($new->tags as $tag)
 				<span class="label label-default">{{ $tag->name}}</span>
 			@endforeach
+			</span>
 			</div>
 
 		</div>

@@ -12,9 +12,9 @@ use App\Mail\xxx;
 class PageController extends Controller
 {
     //
-    public function getIndex(){
+    public function getIndex(Request $request){
     	$posts = Post::orderBy('created_at')->take(5)->get();
-    	return view('home1')->withPosts($posts);
+    	return view('test')->withPosts($posts);
     }
 
     public function getSingle($slug){

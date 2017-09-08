@@ -1,9 +1,10 @@
-@extends('main')
+@extends('layouts.app')
 @section('title', 'Edit')
 @section('style')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 @stop
 @section('content')
+<div class="top-first-padding"></div>
 <div class="container">
 	<div class="row">
 		<div class="col-md-8">
@@ -38,13 +39,14 @@
 				<div class="col-sm-6">
 					{!! Html::linkRoute('posts.show','Cancel', array($post->id), 
 					array('class'=>'btn btn-danger btn-block'))!!}
-					{!! Form::close() !!}
+				
 					<!--
 						<a href="#" class="btn btn-primary btn-block">Edit</a>
 					-->
 				</div>
 			</div>
 		</div>
+		{!! Form::close() !!}
 	</div>
 </div>
 	

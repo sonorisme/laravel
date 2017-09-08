@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="top-first-padding"></div>
 @if (Session::has('success'))
     <div class="alert alert-success">
         <p>Success: {{Session::get('success')}}</p>
